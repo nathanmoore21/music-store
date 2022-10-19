@@ -2,6 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Resources\MusicCollection;
+use App\Http\Controllers\GenreController;
+use App\Http\Controllers\MusicController;
+use App\Http\Controllers\ArtistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::apiResource('/musics', MusicController::class);
+Route::resource('/artists', ArtistController::class)->only(['index', 'show']);
+Route::resource('/genres', GenreController::class)->only(['index', 'show']);
