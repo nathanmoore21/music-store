@@ -37,11 +37,11 @@ class MusicController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Music  $music
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\MusicResource
      */
     public function show(Music $music)
     {
-        //
+        return new MusicResource($music);
     }
 
     /**
