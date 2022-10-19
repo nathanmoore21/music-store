@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\MusicCollection;
+use App\Http\Resources\MusicResource;
 use App\Models\Music;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,10 @@ class MusicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $music = Music::create($request->only([
+            'title', 'album', 'artist', 'genre', 'rating'
+        ]));
+        return new MusicResource($music);
     }
 
     /**
