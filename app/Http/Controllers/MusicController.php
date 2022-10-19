@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\MusicCollection;
 use App\Models\Music;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class MusicController extends Controller
      */
     public function index()
     {
-        //
+        return new MusicCollection(Music::all());
     }
 
     /**
