@@ -53,7 +53,11 @@ class MusicController extends Controller
      */
     public function update(Request $request, Music $music)
     {
-        //
+        $music->update($request->only([
+            'title', 'album', 'artist', 'genre', 'rating'
+        ]));
+
+        return new MusicResource($music);
     }
 
     /**
