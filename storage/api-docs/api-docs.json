@@ -1,0 +1,193 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Music API",
+        "description": "Nathan's Music API",
+        "contact": {
+            "email": "n00201743@student.iadt.ie"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "2.0.0"
+    },
+    "paths": {
+        "/": {
+            "get": {
+                "description": "Home Page",
+                "responses": {
+                    "default": {
+                        "description": "Welcome Page"
+                    }
+                }
+            }
+        },
+        "/api/musics": {
+            "get": {
+                "tags": [
+                    "Musics"
+                ],
+                "summary": "Display a listing of the resource.",
+                "description": "Displays all the songs",
+                "operationId": "05c57eff8dc4c9012e55d00e4729857d",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation, Returns a list of Songs in JSON format"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Musics"
+                ],
+                "summary": "Create a new Song",
+                "description": "Stores the song in the DB",
+                "operationId": "store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "album",
+                                    "artist",
+                                    "genre",
+                                    "rating"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Sample Title"
+                                    },
+                                    "album": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Autobiography"
+                                    },
+                                    "artist": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "A long description about this great book"
+                                    },
+                                    "genre": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Me"
+                                    },
+                                    "rating": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/musics/{id}": {
+            "get": {
+                "tags": [
+                    "Musics"
+                ],
+                "summary": "Display the specified resource.",
+                "description": "Gets a music by ID",
+                "operationId": "b772ba56fdd4e28040aadc3ffc1a23ac",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Music id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Musics"
+                ],
+                "summary": "Delete Music",
+                "description": "Delete Music",
+                "operationId": "destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of a Book",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "204"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
