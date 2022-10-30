@@ -1,66 +1,52 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+NOTE: I'll be creating a lot of my notes in here, rather than giving explanations in the actual files.
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+/////Part 1: (Setting up project)
 
-## About Laravel
+-   sail artisan make:controller BookController --api --model=\_\_\_\_ (for each of my controller - Artist, Genre & Music) - This was to create an API Controller rather than a standard Resource Contoller as API Contollers don't use the Create and Edit functions
+-   sail artisan make:resource MusicResource - (returning one Song) Template where I could define how I wanted the JSON data to be retunred
+-   sail artisan make:resource MusicCollection - (returning multiple Songs)
+-   sail artisan migrate - to publish tables to the database
+-   seeded the database with fake data using faker in MusicFactory.php and by editing the public function in the seeder file
+    when seeding the command sail artisan db:seed didn't seem to be working for me so I had to run the alternative command/s
+    ;sail artisan db:seed --class=MusicSeeder
+    ;sail artisan db:seed --class=ArtistSeeder
+    ;sail artisan db:seed --class=GenreSeeder
+-   sail artisan route:list - gave me an insight to the http method required, the endpoint and the action. For example;
+    GET... api/musics/{music}... musics.show > MusicController@show
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+/////Part 2: (GET all)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   I will GET all music by calling the api.php, contollers, collections and recources
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+/////Part 3: (Store)
 
-## Learning Laravel
+-   Use Eloquent to store data
+-   Mass assignment - when a user passes an unexpected HTTP request field that changes a column in your database
+-   $fillable - help you define which attribrutes you want to make mass assignable
+-   $guarded - can specify which properties are guarded (empty array means they all are)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+/////Part 4: (Show)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+-   I will call the database to retive an {id} - this is done when api.php calls the MusicController:show() function
+-   (Further Explanation) The music{id} is passed as part of the get request, api.php routes to the the show() function in MusicController, Laravel retrives the ID from the database, the MusicResource then converts it into JSON and is returned to the user.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+/////Part 5: (Put/Patch)
 
-## Laravel Sponsors
+-   PUT will work similar to POST, because if the resource doesn't already exist, it will be created.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+/////Part 6: (Destroy)
 
-### Premium Partners
+-   Like all previous parts, I edited the public function in MusicController. In this section I will destroy the Music/Song which will be removed fom the database.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+/////Part 7: (Swagger)
 
-## Contributing
+-   Swagger helps users build, document, test and consume RESTful web services. (https://www.techtarget.com/searchapparchitecture/definition/Swagger)
+-   In this section, I downloaded and installed Swagger for my CA
+-   index.blade.php is where the JSON will be fed into swagger view.
+-   I will edit a lot of my code in each of my controllers to eanble proper documentation for swagger
+-   After editing this code, I will: sail artisan l5-swagger:generate - to 'publish' my code so it is viewable
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+/////////////////////////////////////
+SCRIPT
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+-   Using api.php rather than web.php because **\_\_\_** (part 1, slide 16)

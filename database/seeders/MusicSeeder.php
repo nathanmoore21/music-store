@@ -15,6 +15,7 @@ class MusicSeeder extends Seeder
      * @return void
      */
     public function run()
+    //will create 50 rows of data for the music table
     {
         Music::factory()->times(50)->create();
     }

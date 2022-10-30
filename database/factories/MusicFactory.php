@@ -15,6 +15,7 @@ class MusicFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition()
+    //inserts fake data to the table
     {
         return [
             'title' => $this->faker->word,

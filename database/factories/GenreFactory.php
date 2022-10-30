@@ -15,9 +15,10 @@ class GenreFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition()
+    //inserts fake data to the table
     {
         return [
-            //
+            'genre' => $this->faker->word
         ];
     }
 }

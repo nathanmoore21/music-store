@@ -8,18 +8,22 @@ use App\Models\Music;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
+//Music Contoller page to display the Get, Update and Delete methods on Swagger
+
+///////////////////////////////////////////////////////////////////
+
 class MusicController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the songs.
      *
      * @OA\Get(
      *     path="/api/musics",
      *     description="Displays all the songs",
-     *     tags={"Musics"},
+     *     tags={"Songs"},
      *      @OA\Response(
      *          response=200,
-     *          description="Successful operation, Returns a list of Songs in JSON format"
+     *          description="Successful operation, Returns a list of songs in JSON format"
      *       ),
      *      @OA\Response(
      *          response=401,
@@ -34,32 +38,31 @@ class MusicController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+    //Gets all music/songs
     {
-        // $books = Book::all();
-        // return new BookCollection($books);
         return new MusicCollection(Music::all());
     }
 
-    //////////
+    ///////////////////////////////////////////////////////////////////
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created song in storage.
      *
      * @OA\Post(
      *      path="/api/musics",
      *      operationId="store",
-     *      tags={"Musics"},
-     *      summary="Create a new Song",
+     *      tags={"Songs"},
+     *      summary="Create a new song",
      *      description="Stores the song in the DB",
      *      @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
      *            required={"title", "album", "artist", "genre", "rating"},
-     *            @OA\Property(property="title", type="string", format="string", example="Sample Title"),
-     *            @OA\Property(property="album", type="string", format="string", example="Autobiography"),
-     *            @OA\Property(property="artist", type="string", format="string", example="A long description about this great book"),
-     *            @OA\Property(property="genre", type="string", format="string", example="Me"),
-     *             @OA\Property(property="rating", type="integer", format="integer", example="1")
+     *            @OA\Property(property="title", type="string", format="string", example="Track Title"),
+     *            @OA\Property(property="album", type="string", format="string", example="Album Title"),
+     *            @OA\Property(property="artist", type="string", format="string", example="Artist's Name"),
+     *            @OA\Property(property="genre", type="string", format="string", example="Pop, Rock, Indie etc.."),
+     *            @OA\Property(property="rating", type="integer", format="integer", example="1-10")
      *          )
      *      ),
      *     @OA\Response(
@@ -75,23 +78,22 @@ class MusicController extends Controller
      * @return \Illuminate\Http\MusicResource
      */
     public function store(Request $request)
+    //creates new music/songs
     {
-
         $music = Music::create($request->only([
             'title', 'album', 'artist', 'genre', 'rating'
         ]));
-
         return new MusicResource($music);
     }
 
-
+    ///////////////////////////////////////////////////////////////////
 
     /**
-     * Display the specified resource.
+     * Display a song by it's {id}.
      * @OA\Get(
      *     path="/api/musics/{id}",
-     *     description="Gets a music by ID",
-     *     tags={"Musics"},
+     *     description="Gets a song by ID",
+     *     tags={"Songs"},
      *          @OA\Parameter(
      *          name="id",
      *          description="Music id",
@@ -113,39 +115,26 @@ class MusicController extends Controller
      *          description="Forbidden"
      *      )
      * )
-     * @param  \App\Models\Book  $book
-     * @return \Illuminate\Http\BookResource
+     * @param  \App\Models\Music  $music
+     * @return \Illuminate\Http\MusicResource
      */
     public function show(Music $music)
+    //gets music/song by {id}
     {
         return new MusicResource($music);
     }
 
-
-    // /**
-    //  * Update the specified resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @param  \App\Models\Music  $music
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function update(Request $request, Music $music)
-    // {
-    //     $music->update($request->only([
-    //         'title', 'album', 'artist', 'genre', 'rating'
-    //     ]));
-
-    //     return new MusicResource($music);
-    // }
+    ///////////////////////////////////////////////////////////////////
 
     /**
-     * Update the specified resource in storage.
+     * Update a song in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Music  $music
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Music $music)
+    //updates music/songs
     {
         $music->update($request->only([
             'title', 'album', 'artist', 'genre', 'rating'
@@ -154,18 +143,7 @@ class MusicController extends Controller
         return new MusicResource($music);
     }
 
-    //     /**
-    //      * Remove the specified resource from storage.
-    //      *
-    //      * @param  \App\Models\Music  $music
-    //      * @return \Illuminate\Http\Response
-    //      */
-    //     public function destroy(Music $music)
-    //     {
-    //         $music->delete();
-    //         return response()->json(null, Response::HTTP_NO_CONTENT);
-    //     }
-    // }
+    ///////////////////////////////////////////////////////////////////
 
     /**
      *
@@ -173,10 +151,10 @@ class MusicController extends Controller
      * @OA\Delete(
      *    path="/api/musics/{id}",
      *    operationId="destroy",
-     *    tags={"Musics"},
+     *    tags={"Songs"},
      *    summary="Delete Music",
      *    description="Delete Music",
-     *    @OA\Parameter(name="id", in="path", description="Id of a Book", required=true,
+     *    @OA\Parameter(name="id", in="path", description="Id of a song", required=true,
      *        @OA\Schema(type="integer")
      *    ),
      *    @OA\Response(
@@ -195,14 +173,12 @@ class MusicController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    // Note $book parameter passed in here.
-    // If we had not enabled route model binding
-    // when creating Controller and Model (using --Model)
-    // there would only be a music Id passed in here, and we'd have to
-    // check to see if the music exist.
     public function destroy(Music $music)
+    //delets music/songs
     {
         $music->delete();
         return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }
+
+///////////////////////////////////////////////////////////////////

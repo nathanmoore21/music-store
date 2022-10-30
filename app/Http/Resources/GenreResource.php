@@ -13,7 +13,11 @@ class GenreResource extends JsonResource
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
     public function toArray($request)
+    //will call the database and return the folling
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'genre' => $this->genre,
+        ];
     }
 }

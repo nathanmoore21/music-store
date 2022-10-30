@@ -13,12 +13,108 @@
         "version": "2.0.0"
     },
     "paths": {
-        "/": {
+        "/api/artists": {
             "get": {
-                "description": "Home Page",
+                "tags": [
+                    "Artists"
+                ],
+                "summary": "Display a listing of the Artists.",
+                "description": "Displays all the Artists",
+                "operationId": "2c8aed1387cca1c65d98da7ee11ac926",
                 "responses": {
-                    "default": {
-                        "description": "Welcome Page"
+                    "200": {
+                        "description": "Successful operation, Returns a list of Artists in JSON format"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/api/artists/{id}": {
+            "get": {
+                "tags": [
+                    "Artists"
+                ],
+                "summary": "Display the specified Artists by {id}.",
+                "description": "Gets an Artist by ID",
+                "operationId": "d0b68c06b8bc310fbe24c6d3ea80dac3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Artist ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/api/genres": {
+            "get": {
+                "tags": [
+                    "Genres"
+                ],
+                "summary": "Display a listing of the generes.",
+                "description": "Displays all the genres",
+                "operationId": "eb12635064fefadf7ff7e54900a73534",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation, Returns a list of genres in JSON format"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/api/genres/{id}": {
+            "get": {
+                "tags": [
+                    "Genres"
+                ],
+                "summary": "Display the specified genres by {id}.",
+                "description": "Gets an genre by ID",
+                "operationId": "3e2ac2805d9f25d984bab075133bbb96",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Genre ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
                     }
                 }
             }
@@ -26,14 +122,14 @@
         "/api/musics": {
             "get": {
                 "tags": [
-                    "Musics"
+                    "Songs"
                 ],
-                "summary": "Display a listing of the resource.",
+                "summary": "Display a listing of the songs.",
                 "description": "Displays all the songs",
                 "operationId": "05c57eff8dc4c9012e55d00e4729857d",
                 "responses": {
                     "200": {
-                        "description": "Successful operation, Returns a list of Songs in JSON format"
+                        "description": "Successful operation, Returns a list of songs in JSON format"
                     },
                     "401": {
                         "description": "Unauthenticated"
@@ -45,9 +141,9 @@
             },
             "post": {
                 "tags": [
-                    "Musics"
+                    "Songs"
                 ],
-                "summary": "Create a new Song",
+                "summary": "Create a new song",
                 "description": "Stores the song in the DB",
                 "operationId": "store",
                 "requestBody": {
@@ -66,27 +162,27 @@
                                     "title": {
                                         "type": "string",
                                         "format": "string",
-                                        "example": "Sample Title"
+                                        "example": "Track Title"
                                     },
                                     "album": {
                                         "type": "string",
                                         "format": "string",
-                                        "example": "Autobiography"
+                                        "example": "Album Title"
                                     },
                                     "artist": {
                                         "type": "string",
                                         "format": "string",
-                                        "example": "A long description about this great book"
+                                        "example": "Artist's Name"
                                     },
                                     "genre": {
                                         "type": "string",
                                         "format": "string",
-                                        "example": "Me"
+                                        "example": "Pop, Rock, Indie etc.."
                                     },
                                     "rating": {
                                         "type": "integer",
                                         "format": "integer",
-                                        "example": "1"
+                                        "example": "1-10"
                                     }
                                 },
                                 "type": "object"
@@ -120,10 +216,10 @@
         "/api/musics/{id}": {
             "get": {
                 "tags": [
-                    "Musics"
+                    "Songs"
                 ],
-                "summary": "Display the specified resource.",
-                "description": "Gets a music by ID",
+                "summary": "Display a song by it's {id}.",
+                "description": "Gets a song by ID",
                 "operationId": "b772ba56fdd4e28040aadc3ffc1a23ac",
                 "parameters": [
                     {
@@ -150,7 +246,7 @@
             },
             "delete": {
                 "tags": [
-                    "Musics"
+                    "Songs"
                 ],
                 "summary": "Delete Music",
                 "description": "Delete Music",
@@ -159,7 +255,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Id of a Book",
+                        "description": "Id of a song",
                         "required": true,
                         "schema": {
                             "type": "integer"

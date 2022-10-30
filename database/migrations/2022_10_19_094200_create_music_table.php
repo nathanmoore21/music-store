@@ -12,6 +12,7 @@ return new class extends Migration
      * @return void
      */
     public function up()
+    //includes what attributes I want included in my table for the music table
     {
         Schema::create('music', function (Blueprint $table) {
             $table->id();

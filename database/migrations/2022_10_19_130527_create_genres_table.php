@@ -12,9 +12,11 @@ return new class extends Migration
      * @return void
      */
     public function up()
+    //includes what attributes I want included in my table for the genre table
     {
         Schema::create('genres', function (Blueprint $table) {
             $table->id();
+            $table->string('genre');
             $table->timestamps();
         });
     }

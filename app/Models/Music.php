@@ -9,5 +9,6 @@ class Music extends Model
 {
     use HasFactory;
     protected $fillable = ['title', 'album', 'artist', 'genre', 'rating'];
-    // protected $guarded = [];
+    // protected $guarded = []; = if i wanted all my attributes set as mass assignable
+    // protected $guarded = ['title']; = if i wanted title to be guarded
 }

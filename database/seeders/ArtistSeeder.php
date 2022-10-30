@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Artist;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class ArtistSeeder extends Seeder
 {
@@ -13,7 +14,8 @@ class ArtistSeeder extends Seeder
      * @return void
      */
     public function run()
+    //will create 30 rows of data for the artist table
     {
-        //
+        Artist::factory()->times(30)->create();
     }
 }
