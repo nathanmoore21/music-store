@@ -24,5 +24,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //api route to access music, artist and genre
 Route::apiResource('/musics', MusicController::class);
-Route::resource('/artists', ArtistController::class);
+Route::apiResource('/artists', ArtistController::class);
 Route::resource('/genres', GenreController::class);

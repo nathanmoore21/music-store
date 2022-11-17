@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreArtistRequest;
+use App\Http\Requests\UpdateArtistRequest;
 use App\Http\Resources\ArtistCollection;
 use App\Http\Resources\ArtistResource;
 use App\Models\Artist;
@@ -40,7 +42,7 @@ class ArtistController extends Controller
     public function index()
     //Get all
     {
-        return new ArtistCollection(Artist::all());
+        return new ArtistCollection(Artist::paginate(1));
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -51,12 +53,13 @@ class ArtistController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreArtistRequest $request)
     //store new artist
     {
-        $artist = Artist::create($request->only([
-            'name', 'label'
-        ]));
+        $artist = Artist::create([
+            'name' => $request->name,
+            'label' => $request->label
+        ]);
 
         return new ArtistResource($artist);
     }
@@ -108,14 +111,10 @@ class ArtistController extends Controller
      * @param  \App\Models\Artist  $artist
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Artist $artist)
+    public function update(UpdateArtistRequest $request, Artist $artist)
     //update artist
     {
-        $artist->update($request->only([
-            'name', 'label'
-        ]));
-
-        return new ArtistResource($artist);
+        $artist->update($request->all());
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -130,7 +129,6 @@ class ArtistController extends Controller
     //deletes artist
     {
         $artist->delete();
-        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }
 
