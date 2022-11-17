@@ -9,6 +9,12 @@ class Artist extends Model
 {
     use HasFactory;
     protected $fillable = ['name', 'label'];
+
     // protected $guarded = []; = if i wanted all my attributes set as mass assignable
     // protected $guarded = ['name']; = if i wanted name to be guarded
+
+    public function musics()
+    {
+        return $this->hasMany(Music::class);
+    }
 }

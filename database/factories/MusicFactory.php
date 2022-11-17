@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Artist;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,12 +18,13 @@ class MusicFactory extends Factory
     public function definition()
     //inserts fake data to the table
     {
+        $artists = Artist::all();
         return [
             'title' => $this->faker->word,
             'album' => $this->faker->text(50),
-            'artist' => $this->faker->name,
             'genre' => $this->faker->text(50),
             'rating' => $this->faker->numberBetween(1, 10),
+            'artist_id' => $artists->random()->id,
         ];
     }
 }

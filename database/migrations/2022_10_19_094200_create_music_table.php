@@ -14,14 +14,16 @@ return new class extends Migration
     public function up()
     //includes what attributes I want included in my table for the music table
     {
+
         Schema::create('music', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('album');
-            $table->string('artist');
             $table->string('genre');
             $table->integer('rating');
             $table->timestamps();
+            // $table->unsignedBigInteger('artist_id');
+            // $table->foreign('artist_id')->references('id')->on('artists')->onUpdate('cascade')->onDelete('restrict');
         });
     }
 

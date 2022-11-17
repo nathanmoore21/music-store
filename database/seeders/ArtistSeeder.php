@@ -16,6 +16,9 @@ class ArtistSeeder extends Seeder
     public function run()
     //will create 30 rows of data for the artist table
     {
-        Artist::factory()->times(30)->create();
+        Artist::factory()
+            ->times(4)
+            ->hasMusics(3)
+            ->create();
     }
 }

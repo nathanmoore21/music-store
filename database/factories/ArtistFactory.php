@@ -18,8 +18,8 @@ class ArtistFactory extends Factory
     //inserts fake data to the table
     {
         return [
-            'name' => fake()->name(),
-            'label' => fake()->name()
+            'name' => $this->faker->name,
+            'label' => $this->faker->name,
         ];
     }
 }

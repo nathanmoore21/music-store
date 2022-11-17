@@ -19,9 +19,12 @@ class MusicResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'album' => $this->album,
-            'artist' => $this->artist,
+            // 'artist' => $this->artist,
             'genre' => $this->genre,
             'rating' => $this->rating,
+            'artist_id' => $this->artist->id,
+            'artist_name' => $this->artist->name,
+            'artist_label' => $this->artist->label
         ];
     }
 }

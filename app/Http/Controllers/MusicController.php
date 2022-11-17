@@ -40,7 +40,8 @@ class MusicController extends Controller
     public function index()
     //Gets all music/songs
     {
-        return new MusicCollection(Music::all());
+        // return new MusicCollection(Music::all());
+        return new MusicCollection(Music::with('artist')->get());
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -80,9 +81,13 @@ class MusicController extends Controller
     public function store(Request $request)
     //creates new music/songs
     {
-        $music = Music::create($request->only([
-            'title', 'album', 'artist', 'genre', 'rating'
-        ]));
+        $music = Music::create([
+            'title' => $request->title,
+            'album' => $request->album,
+            'genre' => $request->genre,
+            'rating' => $request->rating,
+            'artist_id' => $request->artist_id
+        ]);
         return new MusicResource($music);
     }
 
@@ -137,7 +142,7 @@ class MusicController extends Controller
     //updates music/songs
     {
         $music->update($request->only([
-            'title', 'album', 'artist', 'genre', 'rating'
+            'title', 'album', 'genre', 'rating', 'artist_id'
         ]));
 
         return new MusicResource($music);
