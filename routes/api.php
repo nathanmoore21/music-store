@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Resources\MusicCollection;
-use App\Http\Controllers\GenreController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MusicController;
 use App\Http\Controllers\ArtistController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +21,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//api route to access music, artist and genre
-Route::apiResource('/musics', MusicController::class);
+Route::post('/auth/register', [AuthController::class, 'register']);
+Route::post('/auth/login', [AuthController::class, 'login']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/auth/logout', [AuthController::class, 'logout']);
+    Route::get('/auth/user', [AuthController::class, 'user']);
+
+    Route::apiResource('/musics', MusicController::class)->except((['index', 'show']));
+});
+
+Route::get('/musics', [MusicController::class, 'index']);
+Route::get('/musics/{music}', [MusicController::class, 'show']);
+
 Route::apiResource('/artists', ArtistController::class);
-Route::resource('/genres', GenreController::class);
