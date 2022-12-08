@@ -32,6 +32,66 @@
                         "description": "Forbidden"
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Artists"
+                ],
+                "summary": "Create a new artist",
+                "description": "Stores the artist in the DB",
+                "operationId": "83d2888bdc6fac66b9a7cc81c4c950fb",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "label"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Name"
+                                    },
+                                    "label": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Label Company"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/api/artists/{id}": {
@@ -64,42 +124,19 @@
                         "description": "Forbidden"
                     }
                 }
-            }
-        },
-        "/api/genres": {
-            "get": {
+            },
+            "delete": {
                 "tags": [
-                    "Genres"
+                    "Artists"
                 ],
-                "summary": "Display a listing of the generes.",
-                "description": "Displays all the genres",
-                "operationId": "eb12635064fefadf7ff7e54900a73534",
-                "responses": {
-                    "200": {
-                        "description": "Successful operation, Returns a list of genres in JSON format"
-                    },
-                    "401": {
-                        "description": "Unauthenticated"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    }
-                }
-            }
-        },
-        "/api/genres/{id}": {
-            "get": {
-                "tags": [
-                    "Genres"
-                ],
-                "summary": "Display the specified genres by {id}.",
-                "description": "Gets an genre by ID",
-                "operationId": "3e2ac2805d9f25d984bab075133bbb96",
+                "summary": "Create a new artist",
+                "description": "Stores the artist in the DB",
+                "operationId": "4f6d8bd2c8b4b738af7589b72348ac20",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Genre ID",
+                        "description": "Id of an artist",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -107,16 +144,31 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Successful operation"
-                    },
-                    "401": {
-                        "description": "Unauthenticated"
-                    },
-                    "403": {
-                        "description": "Forbidden"
+                    "204": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "204"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/api/musics": {
@@ -172,17 +224,22 @@
                                     "artist": {
                                         "type": "string",
                                         "format": "string",
-                                        "example": "Artist's Name"
-                                    },
-                                    "genre": {
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Pop, Rock, Indie etc.."
+                                        "example": "Name"
                                     },
                                     "rating": {
                                         "type": "integer",
                                         "format": "integer",
-                                        "example": "1-10"
+                                        "example": "8"
+                                    },
+                                    "artist_id": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "10"
+                                    },
+                                    "genres": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "[1,2]"
                                     }
                                 },
                                 "type": "object"
@@ -210,7 +267,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/api/musics/{id}": {
@@ -243,6 +305,95 @@
                         "description": "Forbidden"
                     }
                 }
+            },
+            "put": {
+                "tags": [
+                    "Songs"
+                ],
+                "summary": "Update a song",
+                "description": "Stores the song in the DB",
+                "operationId": "put",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Music id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "album",
+                                    "artist",
+                                    "genre",
+                                    "rating"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Track Title"
+                                    },
+                                    "album": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Album Title"
+                                    },
+                                    "rating": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "8"
+                                    },
+                                    "artist_id": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "10"
+                                    },
+                                    "genres": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "[1,2]"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -282,7 +433,23 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "name": "bearerAuth",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
             }
         }
     }

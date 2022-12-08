@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\GenreSeeder;
 use Database\Seeders\ArtistSeeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,8 +16,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        //db:seed will seed the artist and genre tables
         $this->call(ArtistSeeder::class);
-        $this->call(MusicSeeder::class);
+        $this->call(GenreSeeder::class);
+        // $this->call(MusicSeeder::class);
+
+
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

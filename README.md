@@ -1,10 +1,14 @@
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+**Scroll to Line 78 for documentation on CA2**
 
 GitHub Link: https://github.com/nathanmoore21/music-store
-Video Demo Link: https://youtu.be/0rGRRfbMtgs
+CA1 Video Demo Link: https://youtu.be/0rGRRfbMtgs
+CA2 Video Demo Link:
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+**CA1**
 /////Part 1: (Setting up project)
 
 -   sail artisan make:controller BookController --api --model= (for each of my controllers - Artist, Genre & Music) - This was to create an API Controller rather than a standard Resource Controller as API Controllers don't use the Create and Edit functions
@@ -51,7 +55,7 @@ Video Demo Link: https://youtu.be/0rGRRfbMtgs
 -   I will edit a lot of my code in each of my controllers to enable proper documentation for swagger
 -   After editing this code, I will: sail artisan l5-swagger:generate - to 'publish' my code so it is viewable
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////
 
 -   Why I chose this topic for my CA?
     -It was an API I could show interest in, which in the long-run will keep me more involved
@@ -69,4 +73,43 @@ Video Demo Link: https://youtu.be/0rGRRfbMtgs
 -   What applications/tools did I use?
     -VSCode, Insomnia, TablePlus, Laravel, Swagger, Docker
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+**CA2**
+
+/////Part 8: (ERD)
+
+-   Here, I created my ERD which included a pivot table (genre_music). This will allow for a many-to-many relationship between genre and music.
+
+/////Part 9: (One to Many)
+
+-   I created a one-to-many relationship between Artist and Music. Each Artist releases many Songs(Musics) and each Song(Musics) is released by one Artist.
+-   In CA1, I created an Artist and Genre model so I did not need to redo this.
+-   So firstly, I made a migration that will alter the musics table, rather than re-creating it.
+-   Altered, music recourse and controller to allow artist name and label to be returned.
+-   In the music resource I included the artist's name and label to be shown - not just its ID.
+
+/////Part 10: (Artist CRUD)
+
+-   Once again, in CA1 I had already created the majority of the artist's CRUD functionality. Although there were still some changes that needed to be made.
+-   I decided against using paginate to display my data as I thought it was much cleaner, and clearer without it.
+-   I created two form request classes, one which will create (StoreArtistRequest) and one which will update (UpdateArtistRequest) form validation.
+-   I altered the header in insomnia to accept JSON to be returned, for when I was testing my PUT method, otherwise I was being directed to Laravel’s 'home' page
+
+/////Part 11: (Authentication)
+
+-   In this section, I created an AuthController which has register, login and logout. When registering and Logging in Sanctum will generate a bearer token which will give authentication to the user.
+-   Sanctum was already installed as I have the latest version of Laravel, so there was no need to install it.
+-   I also had to alter some lines of code in api.php to ensure authentication is required for accessing these routes.
+-   I then began testing in Insomnia starting with registering a new user to receive a token to allow me access to the CRUD functions.
+
+/////Part 12: (Many to Many)
+
+-   As I already had a genres table, I started off with creating the genre_music table with genre_id and music_id as foreign keys.
+-   I then added the belongs to many relationship in the genre and music model.
+-   I created a new form request for storing music and set auth as true as I want the user to be authorised for when they are creating new music.
+-   Finally, I moved on to testing in Insomnia. I stuck with entering the JSON in rather than multicast as it was just a personal preference. I tested all CRUD functionality for musics and artists.
+
+/////Part 13: (Swagger)
+
+-   Like CA1, I updated my swagger documentation so it is easy to read, understand and use by end-users.

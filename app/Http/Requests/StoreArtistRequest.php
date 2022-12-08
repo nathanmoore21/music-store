@@ -11,7 +11,9 @@ class StoreArtistRequest extends FormRequest
      *
      * @return bool
      */
+    //authorize set to true will require authorisation for storing artists
     public function authorize()
+
     {
         return true;
     }

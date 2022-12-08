@@ -11,6 +11,7 @@ class UpdateArtistRequest extends FormRequest
      *
      * @return bool
      */
+    //authorize set to true will require authorisation for updating artists
     public function authorize()
     {
         return true;
@@ -25,6 +26,7 @@ class UpdateArtistRequest extends FormRequest
     {
         $method = $this->method();
 
+        //both attributes are required for PUT method, unlike PATCH which only sometimes requires them
         if ($method == 'PUT') {
             return [
                 'name' => ['required'],

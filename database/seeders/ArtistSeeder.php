@@ -14,11 +14,11 @@ class ArtistSeeder extends Seeder
      * @return void
      */
     public function run()
-    //will create 30 rows of data for the artist table
+    //will create rows of data for the artist table
     {
         Artist::factory()
-            ->times(4)
-            ->hasMusics(3)
+            ->times(3)
+            ->hasMusics(4)
             ->create();
     }
 }

@@ -13,6 +13,8 @@ class Artist extends Model
     // protected $guarded = []; = if i wanted all my attributes set as mass assignable
     // protected $guarded = ['name']; = if i wanted name to be guarded
 
+
+    //each music can have many artists
     public function musics()
     {
         return $this->hasMany(Music::class);

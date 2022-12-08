@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+// This table was created to allow me to alter the musics table with a foreign key (artist_id)
+
 return new class extends Migration
 {
     /**
@@ -15,6 +17,7 @@ return new class extends Migration
     {
         Schema::table('music', function (Blueprint $table) {
             $table->unsignedBigInteger('artist_id');
+            //foreign key will reference the id of each artist in the artists table
             $table->foreign('artist_id')->references('id')->on('artists')->onUpdate('cascade')->onDelete('restrict');
         });
     }

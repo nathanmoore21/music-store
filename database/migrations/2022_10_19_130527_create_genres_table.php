@@ -28,6 +28,8 @@ return new class extends Migration
      */
     public function down()
     {
+        //new
+        // Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('genres');
     }
 };

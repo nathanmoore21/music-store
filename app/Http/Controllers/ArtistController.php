@@ -42,16 +42,40 @@ class ArtistController extends Controller
     public function index()
     //Get all
     {
-        return new ArtistCollection(Artist::paginate(1));
+        // return new ArtistCollection(Artist::paginate(1));
+        return new ArtistCollection(Artist::all());
     }
 
     ///////////////////////////////////////////////////////////////////
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created song in storage.
+     *
+     * @OA\Post(
+     *      path="/api/artists",
+     *      tags={"Artists"},
+     *      summary="Create a new artist",
+     *      description="Stores the artist in the DB",
+     *      security={{"bearerAuth":{}}},
+     *      @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *            required={"name", "label"},
+     *            @OA\Property(property="name", type="string", format="string", example="Name"),
+     *            @OA\Property(property="label", type="string", format="string", example="Label Company")
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response=200, description="Success",
+     *          @OA\JsonContent(
+     *             @OA\Property(property="status", type="integer", example=""),
+     *             @OA\Property(property="data",type="object")
+     *          )
+     *     )
+     * )
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\MusicResource
      */
     public function store(StoreArtistRequest $request)
     //store new artist
@@ -61,6 +85,7 @@ class ArtistController extends Controller
             'label' => $request->label
         ]);
 
+        //calls for validation rules
         return new ArtistResource($artist);
     }
 
@@ -120,11 +145,33 @@ class ArtistController extends Controller
     ///////////////////////////////////////////////////////////////////
 
     /**
+     *
+     *
+     * @OA\Delete(
+     *    path="/api/artists/{id}",
+     *      tags={"Artists"},
+     *      summary="Create a new artist",
+     *      description="Stores the artist in the DB",
+     *      security={{"bearerAuth":{}}},
+     *    @OA\Parameter(name="id", in="path", description="Id of an artist", required=true,
+     *        @OA\Schema(type="integer")
+     *    ),
+     *    @OA\Response(
+     *         response=Response::HTTP_NO_CONTENT,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *         @OA\Property(property="status_code", type="integer", example="204"),
+     *         @OA\Property(property="data",type="object")
+     *          ),
+     *       )
+     *      )
+     *  )
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Artist  $artist
+     * @param  \App\Models\Music  $music
      * @return \Illuminate\Http\Response
      */
+
     public function destroy(Artist $artist)
     //deletes artist
     {

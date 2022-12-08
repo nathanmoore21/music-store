@@ -15,26 +15,6 @@ use Illuminate\Http\Response;
 class GenreController extends Controller
 {
     /**
-     * Display a listing of the generes.
-     *
-     * @OA\Get(
-     *     path="/api/genres",
-     *     description="Displays all the genres",
-     *     tags={"Genres"},
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation, Returns a list of genres in JSON format"
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      )
-     * )
-     *
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -65,31 +45,6 @@ class GenreController extends Controller
 
     /**
      * Display the specified genres by {id}.
-     * @OA\Get(
-     *     path="/api/genres/{id}",
-     *     description="Gets an genre by ID",
-     *     tags={"Genres"},
-     *          @OA\Parameter(
-     *          name="id",
-     *          description="Genre ID",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="integer")
-     *          ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation"
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      )
-     * )
      * @param  \App\Models\Genre  $book
      * @return \Illuminate\Http\GenreResource
      */

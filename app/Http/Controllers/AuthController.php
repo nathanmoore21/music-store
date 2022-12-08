@@ -23,21 +23,19 @@ class AuthController extends Controller
                 ]
             );
 
-
             if ($validator->fails()) {
-                // create the JSON that will be returned in the response
+                // JSON that will be returned in the response
                 return response()->json(
                     [
                         'status' => false,
                         'message' => 'validation error',
                         $validator->errors()
                     ],
-                    // Have a look at all the Response codes in by ctrl click HTTP_UNPROCESSABLE_ENTITY below.
                     Response::HTTP_UNPROCESSABLE_ENTITY
                 );
             }
 
-            // If you get this far, validation passed, so create the user in the database.
+            // validation passed
             $user = User::create(
                 [
                     'name' => $request->name,
@@ -45,8 +43,6 @@ class AuthController extends Controller
                     'password' => bcrypt($request->password)
                 ]
             );
-
-            // check out the table personal_access_tokens to see the generated tokens
             $token = $user->createToken('music-store-token')->plainTextToken;
 
             // create the successful response including the token
@@ -100,9 +96,7 @@ class AuthController extends Controller
                 'message' => 'User Logged In Successfully',
                 'token' => $user->createToken("music-store-token")->plainTextToken
             ], 200);
-        }
-        // If any other error is thrown it will be caught here
-        catch (\Throwable $th) {
+        } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
                 'message' => $th->getMessage()
@@ -110,7 +104,7 @@ class AuthController extends Controller
         }
     }
 
-    // This function returns the user profile, but only if they are logged in so have an authentication token
+    // This function returns the user profile, but only if they are logged in.
     public function user()
     {
         return response()->json(['user' => auth()->user()], Response::HTTP_OK);
