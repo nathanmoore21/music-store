@@ -4,7 +4,7 @@
 
 GitHub Link: https://github.com/nathanmoore21/music-store
 CA1 Video Demo Link: https://youtu.be/0rGRRfbMtgs
-CA2 Video Demo Link:
+CA2 Video Demo Link: https://www.youtube.com/watch?v=np1a9WmrfAU
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

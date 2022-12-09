@@ -150,8 +150,8 @@ class ArtistController extends Controller
      * @OA\Delete(
      *    path="/api/artists/{id}",
      *      tags={"Artists"},
-     *      summary="Create a new artist",
-     *      description="Stores the artist in the DB",
+     *      summary="Delete an artist",
+     *      description="Removes an artist from the DB",
      *      security={{"bearerAuth":{}}},
      *    @OA\Parameter(name="id", in="path", description="Id of an artist", required=true,
      *        @OA\Schema(type="integer")

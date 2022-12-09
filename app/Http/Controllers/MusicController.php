@@ -161,7 +161,7 @@ class MusicController extends Controller
      *              type="integer")
      *          ),
      *      summary="Update a song",
-     *      description="Stores the song in the DB",
+     *      description="Updates the song in the DB",
      *      security={{"bearerAuth":{}}},
      *      @OA\RequestBody(
      *         required=true,
@@ -209,7 +209,7 @@ class MusicController extends Controller
      *    operationId="destroy",
      *    tags={"Songs"},
      *    summary="Delete Music",
-     *    description="Delete Music",
+     *    description="Delete Music from the DB",
      *    security={{"bearerAuth":{}}},
      *    @OA\Parameter(name="id", in="path", description="Id of a song", required=true,
      *        @OA\Schema(type="integer")

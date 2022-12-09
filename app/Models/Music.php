@@ -16,7 +16,7 @@ class Music extends Model
     // protected $guarded = ['title']; = if i wanted title to be guarded
 
 
-    //added the ‘belongsTo’ relationship below so the music model belongs to artist.
+    //added the ‘belongsTo’ relationship below so the music model belongs to artist model.
     public function artist()
     {
         return $this->belongsTo(Artist::class);

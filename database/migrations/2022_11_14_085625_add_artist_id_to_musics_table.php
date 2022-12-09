@@ -5,7 +5,6 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 // This table was created to allow me to alter the musics table with a foreign key (artist_id)
-
 return new class extends Migration
 {
     /**

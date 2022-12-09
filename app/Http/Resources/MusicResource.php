@@ -20,7 +20,7 @@ class MusicResource extends JsonResource
             array_push($genres, $genre->genre);
         }
 
-        //removed 'artist' as it is no longer needed as I have 'artist_id' (foreign key)
+        //removed 'artist' as it is no longer needed as I have 'artist_id' (one to many)
         //removed 'genre' as it is no longer needed as I have 'genres' (many to many)
         return [
             'id' => $this->id,

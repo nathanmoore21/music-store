@@ -129,8 +129,8 @@
                 "tags": [
                     "Artists"
                 ],
-                "summary": "Create a new artist",
-                "description": "Stores the artist in the DB",
+                "summary": "Delete an artist",
+                "description": "Removes an artist from the DB",
                 "operationId": "4f6d8bd2c8b4b738af7589b72348ac20",
                 "parameters": [
                     {
@@ -311,7 +311,7 @@
                     "Songs"
                 ],
                 "summary": "Update a song",
-                "description": "Stores the song in the DB",
+                "description": "Updates the song in the DB",
                 "operationId": "put",
                 "parameters": [
                     {
@@ -400,7 +400,7 @@
                     "Songs"
                 ],
                 "summary": "Delete Music",
-                "description": "Delete Music",
+                "description": "Delete Music from the DB",
                 "operationId": "destroy",
                 "parameters": [
                     {
